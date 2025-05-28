@@ -5,7 +5,7 @@
 		<if_sid>18106</if_sid> 
 		<field name="win.system.eventID">4769</field>
 		<field name="win.eventdata.Ticket_Encryption_Type">0x17</field>
-		<field name"win.eventData.ServiceName">MSSQLSvc|HTTP|LDAP|SMTP|HOST</filed>
+		<field name="win.eventData.ServiceName">MSSQLSvc|HTTP|LDAP|SMTP|HOST</filed>
 		<description>Kerberoasting Alert: TGS requested SPN with RC4 encryption</description>
 		<mitre>
 			<id>T1558.003</id>
