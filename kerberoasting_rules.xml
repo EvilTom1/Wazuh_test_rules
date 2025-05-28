@@ -1,0 +1,57 @@
+<group name="windows, Kerberos, kerberoasting, windows_security,">
+
+	<!-- rule1 detects TGS req with RC4-HMAC -->
+	<rule id="100101" level="10">
+		<if_sid>18106</if_sid> 
+		<field name="win.system.eventID">4769</field>
+		<field name="win.eventdata.Ticket_Encryption_Type">0x17</field>
+		<field name"win.eventData.ServiceName">MSSQLSvc|HTTP|LDAP|SMTP|HOST</filed>
+		<description>Kerberoasting Alert: TGS requested SPN with RC4 encryption</description>
+		<mitre>
+			<id>T1558.003</id>
+			<technique>kerberoasting</technique>
+			<tactic>Credential Access</tactic>
+		</mitre>
+	</rule>
+
+	<!-- rule2 Rubeus tool execute -->
+	<rule id="100102" level="12">
+		<if_sid>61603</if_sid> <!-- Sysmon event id --> 
+		<field name="win.system.eventID">1</field>
+		<field name="win.eventdata.Image">.*\\rubeus.exe</field>
+		<description>Kerberoasting Alert: Rubeus tool executed</description>
+		<mitre>
+			<id>T1558.003</id>
+			<technique>kerberoasting</technique>
+			<tactic>Credential Access</tactic>
+		</mitre>
+	</rule>
+
+	<!-- rule3 mimikatz tool execute -->
+	<rule id="100103" level="12">
+		<if_sid>61603</if_sid> <!-- Sysmon event id --> 
+		<field name="win.system.eventID">1</field>
+		<field name="win.eventdata.CommandLine">.*kerberos::list\s.*</field>
+		<description>Kerberoasting Alert: Mimikatz used to list Kerberos ticktes.</description>
+		<mitre>
+			<id>T1558.003</id>
+			<technique>kerberoasting</technique>
+			<tactic>Credential Access</tactic>
+		</mitre>
+	</rule>
+
+	<!-- rule4 impacket's (py library) excute -->
+	<rule id="100104" level="10">
+		<if_sid>61603</if_sid> <!-- Sysmon event id --> 
+		<field name="win.system.eventID">1</field>
+		<field name="win.eventdata.CommandLine">.*GetUserSPNs\.py.*</field>
+		<description>Kerberoasting Alert: Impacket's GetUserSPNs.py used to request TGS tickets.</description>
+		<mitre>
+			<id>T1558.003</id>
+			<technique>kerberoasting</technique>
+			<tactic>Credential Access</tactic>
+		</mitre>
+	</rule>
+
+</group>
+
