@@ -1,0 +1,1 @@
+# Wazuh_test_rules
